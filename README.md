@@ -86,6 +86,7 @@ mvn clean test
 ```
 
 ## 📸 Test Example Output
+
 📱 Current package (1st check): com.android.settings
 ✅ Settings app opened successfully on first try!
 [INFO] BUILD SUCCESS
@@ -106,5 +107,6 @@ Environment variables properly set (JAVA_HOME, ANDROID_HOME)
 This project is licensed under the MIT License – you’re free to use and modify it with proper attribution.
 ## 💡 Author
 
-Heba Al-Rubaye
+Heba AL-Rubaye
+
 Automation Test Engineer | QA Enthusiast
