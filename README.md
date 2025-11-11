@@ -1,4 +1,4 @@
-# 📱 Appium Mobile Automation – Android Settings Test
+# 📱 Appium Mobile Automation
 
 # 🧪 Appium | Java | UiAutomator2 | TestNG | Maven
 
@@ -88,7 +88,9 @@ mvn clean test
 ## 📸 Test Example Output
 
 📱 Current package (1st check): com.android.settings
+
 ✅ Settings app opened successfully on first try!
+
 [INFO] BUILD SUCCESS
 
 ## 🛠️ Requirements
