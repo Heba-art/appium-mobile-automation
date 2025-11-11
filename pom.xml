@@ -85,7 +85,6 @@
                             <rules>
                                 <bannedDependencies>
                                     <excludes>
-                                        <!-- حظر أي إصدار من Selenium أقدم من 4 -->
                                         <exclude>org.seleniumhq.selenium:*:*:*:*[3.0.0,4.0.0 )</exclude>
                                     </excludes>
                                 </bannedDependencies>
