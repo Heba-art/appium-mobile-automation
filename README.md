@@ -1,4 +1,4 @@
-# 📱 Appium Mobile Automation
+# 📱 Appium Mobile Automation – Android Settings Test
 
 # 🧪 Appium | Java | UiAutomator2 | TestNG | Maven
 
