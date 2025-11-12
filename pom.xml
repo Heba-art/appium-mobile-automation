@@ -12,11 +12,15 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Lib versions -->
         <appium.version>9.0.0</appium.version>
         <selenium.version>4.15.0</selenium.version>
         <testng.version>7.7.1</testng.version>
+        <slf4j.simple.version>2.0.13</slf4j.simple.version>
     </properties>
 
+    <!-- Pin versions here -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -38,6 +42,7 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Appium (exclude any Selenium pulled transitively; we add our own) -->
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
@@ -48,29 +53,67 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
+        <!-- Selenium 4 -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
         </dependency>
+
+        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- OPTIONAL: quiet the "No SLF4J providers were found" message -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.simple.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- Java compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
             </plugin>
+
+            <!-- Run TestNG suite and exclude BaseTest -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
+                <configuration>
+                    <!-- Point to your TestNG suite -->
+                    <suiteXmlFiles>
+                        <file>testng.xml</file>
+                    </suiteXmlFiles>
+
+                    <!-- Make sure BaseTest isn't picked up as a test -->
+                    <excludes>
+                        <exclude>**/BaseTest.java</exclude>
+                        <exclude>**/Abstract*.java</exclude>
+                    </excludes>
+
+                    <!-- Handy system properties -->
+                    <systemPropertyVariables>
+                        <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+                        <file.encoding>UTF-8</file.encoding>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
+
+            <!-- Enforce no Selenium 3 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -85,7 +128,8 @@
                             <rules>
                                 <bannedDependencies>
                                     <excludes>
-                                        <exclude>org.seleniumhq.selenium:*:*:*:*[3.0.0,4.0.0 )</exclude>
+                                        <!-- ban Selenium < 4 -->
+                                        <exclude>org.seleniumhq.selenium:*:*:*:*[3.0.0,4.0.0)</exclude>
                                     </excludes>
                                 </bannedDependencies>
                             </rules>

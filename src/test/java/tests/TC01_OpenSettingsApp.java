@@ -1,11 +1,9 @@
 package tests;
 
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -15,7 +13,8 @@ import java.nio.file.Path;
 import java.time.Duration;
 
 
-public class FirstTest extends BaseTest {
+public class TC01_OpenSettingsApp extends BaseTest {
+
 
     @Test
     public void openSettingsTest() {
@@ -34,7 +33,7 @@ public class FirstTest extends BaseTest {
             });
 
             // If the above condition becomes true, print a success message and exit the test
-            System.out.println("✅ Settings opened successfully on first try!");
+            System.out.println("✅ TC01 Passed:Settings opened successfully on first try!");
             return;
 
         } catch (TimeoutException e1) {
