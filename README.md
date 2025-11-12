@@ -28,6 +28,7 @@ It includes multiple test cases that validate key components of the Settings app
 The automation suite launches and verifies the Settings app using Appium’s UiAutomator2 engine.
 It first attempts to detect if the app opens automatically; if not, it performs a fallback launch.
 Each test case covers an essential Settings feature — from the Search icon to Wi-Fi, Bluetooth, Sound, and more.
+
 ---
 
 ## 🧩 Tech Stack
