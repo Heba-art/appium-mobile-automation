@@ -15,16 +15,19 @@
 
 ---
 
-This project demonstrates how to automate Android applications using **Appium**, **Java**, and **UiAutomator2**.  
-The main goal is to open and verify the **Settings app** on an Android emulator through a simple and reliable test case.
+## 🧠 About the Project
+
+This project demonstrates how to automate Android system applications using Appium, Java, and UiAutomator2.
+The main goal is to test and verify the Android Settings app (com.android.settings) on an emulator through a structured and maintainable automation framework.
+It includes multiple test cases that validate key components of the Settings app—ensuring its pages, icons, and toggles are displayed and responsive.
 
 ---
 
 ## 🚀 Project Overview
 
-The project uses the **Appium automation framework** to launch and validate the `com.android.settings` app on an Android emulator.  
-It includes a test that waits for the Settings app to open automatically, and if it doesn’t, triggers a fallback mechanism to open it manually.
-
+The automation suite launches and verifies the Settings app using Appium’s UiAutomator2 engine.
+It first attempts to detect if the app opens automatically; if not, it performs a fallback launch.
+Each test case covers an essential Settings feature — from the Search icon to Wi-Fi, Bluetooth, Sound, and more.
 ---
 
 ## 🧩 Tech Stack
@@ -44,36 +47,54 @@ It includes a test that waits for the Settings app to open automatically, and if
 ```bash
 AppiumMobileAutomation/
 │
-├── pom.xml # Maven configuration file
-├── testng.xml # TestNG suite configuration
+├── pom.xml                      # Maven dependencies & build settings
+├── testng.xml                   # TestNG suite configuration (includes all test classes)
+│
+├── LICENSE                      # License information (MIT)
+├── README.md                    # Project documentation
+├── TestCases.md                 # Detailed test cases table
 │
 └── src/
-└── test/
-└── java/
-└── tests/
-├── BaseTest.java # Sets up and tears down the Appium driver
-├── FirstTest.java # Contains the test logic to open Settings
-└── openSettingsTest.java # Main test class
+    └── test/
+        └── java/
+            └── tests/
+                ├── BaseTest.java                    # Initializes & tears down Appium driver session
+                │
+                ├── TC01_OpenSettingsApp.java        # Opens Settings app and verifies current package
+                ├── TC02_VerifySearchIcon.java       # Validates visibility & state of Search bar
+                ├── TC03_VerifyNetworkOption.java    # Checks presence of "Network & Internet" option
+                ├── TC04_OpenWiFiSettings.java       # Navigates into Wi-Fi section & verifies toggle/list
+                ├── TC05_VerifyBluetoothSettings.java # Validates Bluetooth section in Connected Devices
+                ├── TC06_ValidateSoundSettings.java   # Opens "Sound & Vibration" and verifies page
+                ├── TC07_CheckDisplaySettings.java    # Validates brightness slider in Display settings
+                ├── TC08_VerifyStorageInfo.java       # Checks Storage section for usage information
+                ├── TC09_ScrollToBatteryOption.java   # Scrolls and verifies Battery option visibility
+                └── TC10_ReturnToHomeScreen.java      # Navigates back to main Settings home screen
+
 ```
 
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ Configuration Steps
 
 Before running, make sure to:
 1. Install **Appium Server** and ensure it’s running on `http://127.0.0.1:4723/`.
 2. Start your Android **emulator** (for example: `emulator-5554`).
 3. Verify that the device appears under `adb devices`.
+4. .Verify your environment variables:
+   JAVA_HOME
+   ANDROID_HOME
 
 ---
 
-## 🧠 How the Test Works
+## 🧠 Test Execution Logic
 
-1. The test first tries to detect whether the **Settings app** is already open.  
-2. If not detected within the timeout, it automatically uses `driver.activateApp("com.android.settings")` to open it manually.  
-3. Once opened, it verifies that the current package equals `com.android.settings`.
-4. If both checks fail, a screenshot is captured for debugging.
+1. Wait for Settings app to open automatically.
+2. If not found, use driver.activateApp("com.android.settings").
+3. Validate the current package name.
+4. If failure occurs, capture a screenshot and log it for debugging.
+5. Run subsequent UI validations such as buttons, labels, and scroll actions.
 
 ---
 
@@ -84,14 +105,16 @@ Run tests using Maven:
 ```bash
 mvn clean test
 ```
+---
 
 ## 📸 Test Example Output
 
 📱 Current package (1st check): com.android.settings
-
-✅ Settings app opened successfully on first try!
-
+✅ TC01 Passed: Settings opened successfully on first try!
+✅ TC02 Passed: Search icon is visible and enabled.
 [INFO] BUILD SUCCESS
+
+---
 
 ## 🛠️ Requirements
 
@@ -101,12 +124,29 @@ Maven 3.9+
 
 Appium Server 2.x
 
-Android SDK with an active emulator or physical device
+Android SDK + Emulator (API Level 30 or higher)
 
-Environment variables properly set (JAVA_HOME, ANDROID_HOME)
+Properly configured PATH variables
+
+---
+
+## 📊 Future Enhancements
+
+🧩 Add Allure Reports for visual analytics
+
+🧠 Implement Page Object Model (POM) for better maintainability
+
+⚙️ Integrate CI/CD with GitHub Actions or Jenkins
+
+📲 Add test coverage for other system apps (Camera, Phone, etc.)
+
+---
+
 ## 🧾 License
 
 This project is licensed under the MIT License – you’re free to use and modify it with proper attribution.
+
+---
 ## 💡 Author
 
 Heba AL-Rubaye
