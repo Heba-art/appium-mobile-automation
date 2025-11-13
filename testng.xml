@@ -5,6 +5,7 @@
         <classes>
             <class name="tests.TC01_OpenSettingsApp"/>
             <class name="tests.TC02_VerifySearchIcon"/>
+            <class name="tests.TC03_VerifyNetworkOption"/>
         </classes>
     </test>
 </suite>
